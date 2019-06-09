@@ -34,8 +34,7 @@ $(document).ajaxStart(function() {
 // ajaxStop 在所有的ajax完成时, 调用
 $(document).ajaxStop(function() {
 
-  // 模拟网络延迟   这里用setTimeout是模拟网络延迟
-  // 真实工作直接调用进度条完成   不用定时器
+  // 模拟网络延迟
   setTimeout(function() {
     // 关闭进度条
     NProgress.done();
