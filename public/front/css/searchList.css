@@ -1,0 +1,41 @@
+.lt_sort {
+  height: 30px;
+  line-height: 30px;
+  background-color: #EEEEEE;
+  font-size: 12px;
+  text-align: center;
+}
+.lt_sort a {
+  float: left;
+  width: 25%;
+  color: #666;
+}
+.lt_sort a.current {
+  color: orange;
+}
+.lt_sort a i {
+  margin: 0 3px;
+}
+
+.loading {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #069;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 150px;
+  /* 使用动画 */
+  /* 动画名称 动画时间 */
+  animation: rotate 1s infinite ease-in-out;
+}
+
+/* 动画 */
+@keyframes rotate {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
