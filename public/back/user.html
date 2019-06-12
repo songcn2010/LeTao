@@ -28,7 +28,7 @@
   <!-- 导航 -->
   <div class="nav">
     <ul>
-      <li><a href="user.html"><i class="glyphicon glyphicon-user"></i> <span>用户管理</span></a></li>
+      <li><a href="user.html" class="current"><i class="glyphicon glyphicon-user"></i> <span>用户管理</span></a></li>
       <li>
         <a href="javascript:;" class="category"><i class="glyphicon glyphicon-list"></i> <span>分类管理</span></a>
         <div class="child" style="display: none">
@@ -57,15 +57,35 @@
     <!-- 路径导航, 面包屑导航 -->
     <ol class="breadcrumb mt_20">
       <li><a href="index.html">管理系统</a></li>
-      <li class="active">首页</li>
+      <li class="active">用户管理</li>
     </ol>
 
-    <!-- echarts 图表 -->
+    <!-- 乐淘content -->
     <div class="lt_content">
 
-      <div class="echarts_1 pull-left"></div>
+      <!-- 表格 -->
+      <!-- 序号	用户名	手机号	状态	操作 -->
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>手机号</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 挖个坑 -->
+        </tbody>
+      </table>
 
-      <div class="echarts_2 pull-right"></div>
+
+      <!-- 准备分页结构, bootstrap3 要求是 ul -->
+      <div class="text-right">
+        <ul id="paginator" class="pull-right"></ul>
+      </div>
+      
 
     </div>
 
@@ -102,6 +122,59 @@
 </div>
 
 
+<div class="modal fade" tabindex="-1" id="userModal">
+
+  <!-- 模态框结构 -->
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="red"><i class="glyphicon glyphicon-info-sign"></i> 你确定要执行此操作吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">确定</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- 
+  使用模板引擎步骤
+  1. 引包
+  2. 准备结构(模板)
+  3. 准备数据
+  4. 将数据和模板相结合
+-->
+<script type="text/html" id="tpl">
+  {{ each rows v i }}
+    <tr>
+      <!-- 当前页的个数 + 前面的页数*每页多少条 -->
+      <td>{{ i + 1 +  (page-1) * size }}</td>
+      <td>{{ v.username }}</td>
+      <td>{{ v.mobile }}</td>
+      <!-- isDelete 标记当前用户状态, 1表示正常, 0表示禁用 -->
+      <td>
+        {{ v.isDelete === 1 ? '正常' : '禁用' }}
+      </td>
+      <td data-id="{{ v.id }}">
+        {{ if v.isDelete === 1 }}
+          <button class="btn btn-danger">禁用</button>
+        {{ /if }}
+
+        {{ if v.isDelete === 0 }}
+          <button class="btn btn-success">启用</button>
+        {{ /if }}
+      </td>
+    </tr>
+  {{ /each }}
+</script>
 
 
 
@@ -110,9 +183,10 @@
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="./lib/nprogress/nprogress.js"></script>
-<script src="./lib/echarts/echarts.min.js"></script>
+<script src="./lib/artTemplate/template-web.js"></script>
+<script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <script src="js/common.js"></script>
-<script src="js/index.js"></script>
+<script src="js/user.js"></script>
 
 </body>
 </html>

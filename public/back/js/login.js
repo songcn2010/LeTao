@@ -1,31 +1,41 @@
-$(function(){
-  
-  // 1.进行表单校验配置
-  //   校验要求
-  //     (1)用户名不能为空，长度2--6位
-  //     (2)密码不能为空，长度6--12位
-  $('#form').bootstrapValidator({
-    feedbackIcons: {//根据验证结果显示的各种图标
-      valid: 'glyphicon glyphicon-ok',     //校验成功
-      invalid: 'glyphicon glyphicon-remove',    //校验失败
-      validating: 'glyphicon glyphicon-refresh'     //校验中
+/**
+ * Created by Jepson on 2018/8/18.
+ */
+
+$(function() {
+  /*
+   * 1. 进行表单校验配置
+   *    校验要求:
+   *        (1) 用户名不能为空, 长度为2-6位
+   *        (2) 密码不能为空, 长度为6-12位
+   * */
+  // 配置的字段和 input 框中指定的 name 关联, 所以必须要给 input 加上 name
+  $("#form").bootstrapValidator({
+
+    // 配置校验图标
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',    // 校验成功
+      invalid: 'glyphicon glyphicon-remove',  // 校验失败
+      validating: 'glyphicon glyphicon-refresh' // 校验中
     },
 
-
-    //配置字段
+    // 配置字段
     fields: {
       username: {
-        //配置校验规则
+        // 配置校验规则
         validators: {
-          //非空
+          // 非空
           notEmpty: {
+            // 提示信息
             message: "用户名不能为空"
           },
+          // 长度校验
           stringLength: {
             min: 2,
             max: 6,
-            message: "用户名长度必须在2-6位"
+            message: "用户名长度必须在 2-6 位"
           },
+          // 专门用于配置回调提示的规则
           callback: {
             message: "用户名不存在"
           }
@@ -39,15 +49,15 @@ $(function(){
           stringLength: {
             min: 6,
             max: 12,
-            message: "密码长度必须在6-12位"
+            message: "密码长度必须是 6-12 位"
           },
           callback: {
             message: "密码错误"
           }
-        }       
+        }
       }
     }
-  })
+  });
 
 
 
@@ -61,7 +71,7 @@ $(function(){
 
   // 注册表单校验成功事件
   $('#form').on("success.form.bv", function( e ) {
-    // 阻止默认submit的表单提交
+    // 阻止默认的表单提交
     e.preventDefault();
 
     //console.log( "校验成功后的 表单提交 被阻止了" );
@@ -70,9 +80,7 @@ $(function(){
     $.ajax({
       type: "post",
       url: "/employee/employeeLogin",
-      data: $('#form').serialize(),   
-      //这个方法可以直接把表单信息序列化，username=**&password=***
-
+      data: $('#form').serialize(),
       dataType: "json",
       success: function( info ) {
         console.log( info );
@@ -101,15 +109,18 @@ $(function(){
   });
 
 
+
   /*
   * 3. 重置功能
   * */
- $('[type="reset"]').click(function() {
-  // 调用插件的方法, 进行重置校验状态
-  // resetForm(boolean),
-  // 1. 传true, 重置内容以及校验状态
-  // 2. 传false, 只重置校验状态
-  $('#form').data("bootstrapValidator").resetForm();
-});
+  $('[type="reset"]').click(function() {
+    // 调用插件的方法, 进行重置校验状态
+    // resetForm(boolean),
+    // 1. 传true, 重置内容以及校验状态
+    // 2. 传false, 只重置校验状态
+    $('#form').data("bootstrapValidator").resetForm();
+  });
+
+
 
 });
