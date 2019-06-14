@@ -12,47 +12,51 @@
   <!-- 引入 font-awesome 字体图标库 -->
   <link rel="stylesheet" href="./lib/fa/css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/searchList.css">
+  <link rel="stylesheet" href="./css/user.css">
 </head>
 <body>
+
 
 <!-- 全屏容器 -->
 <div class="lt_container">
   <!-- 乐淘头部 -->
   <div class="lt_header">
-    <a href="javascript: history.go(-1);" class="icon_left"><i class="mui-icon mui-icon-back"></i></a>
-    <h3>搜索中心</h3>
+    <a href="javascript:history.go(-1);" class="icon_left"><i class="mui-icon mui-icon-back"></i></a>
+    <h3>会员中心</h3>
   </div>
+
 
   <!-- 乐淘主体 -->
   <div class="lt_main">
     <div class="mui-scroll-wrapper">
       <div class="mui-scroll">
-        <!--这里放置真实显示的DOM内容-->
 
-        <!-- 搜索模块 -->
-        <div class="lt_search">
-          <input type="text" class="search_input" placeholder="请输入搜索关键字">
-          <button class="mui-btn mui-btn-primary search_btn">搜索</button>
+
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell mui-media" id="userInfo">
+            <!-- 挖个坑 -->
+          </li>
+
+          <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">账号与安全</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">我的购物车</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">收货地址管理</a>
+          </li>
+        </ul>
+
+        <div class="btnWrapper">
+          <button class="mui-btn mui-btn-block logoutBtn" >退出</button>
         </div>
 
-        <!-- 排序 -->
-        <div class="lt_sort">
-          <a href="#">上架时间<i class="fa fa-angle-down"></i></a>
-          <a data-type="price" href="#" >价格<i class="fa fa-angle-down"></i></a>
-          <a data-type="num" href="#">库存<i class="fa fa-angle-down"></i></a>
-          <a href="#">折扣<i class="fa fa-angle-down"></i></a>
-        </div>
-
-        <!-- 产品模块 -->
-        <div class="lt_product">
-          <!-- 挖个坑 -->
-          <!--<div class="loading"></div>-->
-        </div>
 
       </div>
     </div>
   </div>
+
 
   <!-- 乐淘底部 -->
   <div class="lt_footer">
@@ -76,7 +80,7 @@
         </a>
       </li>
       <li>
-        <a href="user.html">
+        <a href="user.html" class="current">
           <i class="fa fa-user"></i>
           <p>用户中心</p>
         </a>
@@ -85,25 +89,15 @@
   </div>
 </div>
 
-
-<script type="text/html" id="productTpl">
-  <ul class="mui-clearfix">
-    {{ each data v i }}
-      <li class="lt_product_item">
-        <a href="product.html?productId={{ v.id }}" data-id="{{ v.id }}">
-          <img src="{{ v.pic[0].picAddr }}" alt="">
-          <p class="mui-ellipsis-2">{{ v.proName }}</p>
-          <p>
-            <span class="price">¥{{ v.price }}</span>
-            <span class="oldPrice">¥{{ v.oldPrice }}</span>
-          </p>
-          <button class="mui-btn mui-btn-primary">立即购买</button>
-        </a>
-      </li>
-    {{ /each }}
-  </ul>
+<script type="text/html" id="userTpl">
+  <a href="javascript:;">
+    <img class="mui-media-object mui-pull-left" src="./images/user.jpg">
+    <div class="mui-media-body">
+      {{ username }}
+      <p class='mui-ellipsis'>绑定手机: {{ mobile }} </p>
+    </div>
+  </a>
 </script>
-
 
 
 
@@ -111,7 +105,7 @@
 <script src="./lib/zepto/zepto.min.js"></script>
 <script src="./lib/artTemplate/template-web.js"></script>
 <script src="./js/common.js"></script>
-<script src="./js/searchList2.js"></script>
+<script src="./js/user.js"></script>
 
 
 </body>

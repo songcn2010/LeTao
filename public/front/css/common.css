@@ -164,3 +164,20 @@ img {
 .lt_product_item .mui-ellipsis-2 {
   height: 40px;
 }
+
+
+/* 公用的尺码样式 */
+.lt_size span {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #ccc;
+  display: inline-block;
+  font-size: 12px;
+  margin: 3px 0;
+}
+.lt_size span.current {
+  background-color: orange;
+  color: #fff;
+}
